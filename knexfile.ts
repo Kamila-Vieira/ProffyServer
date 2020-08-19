@@ -9,7 +9,7 @@ module.exports = {
     database : process.env.PG_DATABASE,
   },
   migrations: {
-    directory: __dirname + 'src/database/migrations'
+    directory: __dirname + '/src/database/migrations'
   },
   useNullAsDefault: true
 }
