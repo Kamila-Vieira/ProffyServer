@@ -1,4 +1,5 @@
-import 'dotenv/config';
+import path from 'path'
+import 'dotenv/config'
 
 module.exports = {
   client: 'pg',
@@ -9,7 +10,7 @@ module.exports = {
     database : process.env.PG_DATABASE,
   },
   migrations: {
-    directory: __dirname + '/src/database/migrations'
+    directory: path.resolve(__dirname, 'src', 'database', 'migrations')
   },
   useNullAsDefault: true
 }
