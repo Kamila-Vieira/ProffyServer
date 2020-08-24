@@ -30,10 +30,10 @@ export default class ClassesController {
         .whereExists(function() {
             this.select('class_schedule.*')
             .from('class_schedule')
-            .whereRaw('`class_schedule`.`class_id` = `classes`.`id`')
-            .whereRaw('`class_schedule`.`week_day` = ??', [Number(week_day)])
-            .whereRaw('`class_schedule`.`from` <= ??', [timeInMinutes])
-            .whereRaw('`class_schedule`.`to` > ??', [timeInMinutes])
+            .whereRaw('class_schedule.class_id = classes.id')
+            .whereRaw('class_schedule.week_day = ??', [Number(week_day)])
+            .whereRaw('class_schedule.from <= ??', [timeInMinutes])
+            .whereRaw('class_schedule.to > ??', [timeInMinutes])
         })
         .where('classes.subject', '=', subject)
         .join('users', 'classes.user_id', '=', 'user_id')
@@ -57,11 +57,19 @@ export default class ClassesController {
     
         try {
             const insertedUsersIds = await trx('users').insert({
+<<<<<<< HEAD
                 name,
                 avatar,
                 whatsapp,
                 bio,
             });
+=======
+            name,
+            avatar,
+            whatsapp,
+            bio,
+            }).returning('id');
+>>>>>>> 685b81c42e6456604e56083850da313b19cc9cdf
     
             const user_id = insertedUsersIds[0];
     
@@ -69,7 +77,7 @@ export default class ClassesController {
                 subject,
                 cost,
                 user_id,
-            });
+            }).returning('id');
             
             const class_id = insertedClassesIds[0];
     
