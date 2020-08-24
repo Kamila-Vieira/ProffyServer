@@ -57,10 +57,10 @@ export default class ClassesController {
     
         try {
             const insertedUsersIds = await trx('users').insert({
-            name,
-            avatar,
-            whatsapp,
-            bio,
+                name,
+                avatar,
+                whatsapp,
+                bio,
             });
     
             const user_id = insertedUsersIds[0];
